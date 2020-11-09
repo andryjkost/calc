@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -74,8 +76,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.showResult:
                 String res = expression.getText().toString();
-                String kek = Integer.toString(Calculator.Answer(Calculator.toRPN(res)));
-                expression.setText(kek);
+                try {
+                    String kek = Integer.toString(Calculator.Answer(Calculator.toRPN(res)));
+                    expression.setText(kek);
+                }
+                catch(EmptyStackException e){
+                Toast.makeText(this, "Неправильно введенно выражение", Toast.LENGTH_SHORT).show();
+            }
+
                 flag = 1;
                 break;
             default:
