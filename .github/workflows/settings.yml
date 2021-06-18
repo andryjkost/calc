@@ -19,13 +19,16 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: permission for gradlew
+        working-directory: ./Calculator
         run: chmod +x gradlew
       - name: Build with Gradle
+        working-directory: ./Calculator
         run: ./gradlew build
       - name: Check code style
+        working-directory: ./Calculator
         run: ./gradlew lint
       - name: Build release APK after test
-        working-directory: ./Pril
+        working-directory: ./Calculator
         run: |
           ./gradlew test
           ./gradlew assembleRelease
@@ -40,6 +43,7 @@ jobs:
           name: app-release.apk
           path: app/build/outputs/apk/release/app-release-unsigned.apk
       - name: Unit-Test
+        working-directory: ./Calculator
         run: ./gradlew testDebugUnitTest
 
       - name: Test Report
